@@ -1,0 +1,76 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using AssessmentApp.Data;
+using AssessmentApp.Models;
+using System.Threading.Tasks;
+
+[ApiController]
+[Route(“api/[controller]”)]
+Public class AssessmentController : Controller
+{
+	private readonly AppDbContext _context;
+	
+	public ContentController(AppDbContext context)
+	{
+		_context = context;
+	}
+
+	// Tracking view endpoint
+	[HttpPost(“submit”)]
+	Public async Task<IActionResult> Index ()
+	{
+    var items = await _context.AssessmentItems.ToListAsync();
+    return View(items);
+	}
+
+	//Submission endpoint
+	[HttpPost(“submit”)]
+	public async Task<IActionResult> Submit([FormValue] string title, string submitter)
+	{
+		var item = new AssessmentItem { Title = title, Submitter = submitter };
+    _context.AssessmentItems.Add(item);
+		await _context.SaveChangesAsync();
+
+		return RedirectToAction(nameof(Index));
+	}
+
+  // Assignment endpoint
+  [HttpPost("assign/{id}")]
+  public async Task<IActionResult> Assign()
+  {
+    var item = await _context.AssessmentItems.FindAsync(id);
+    if (item != null)
+    {
+      item.Reviewer = reviewer;
+      item.Status = "Assigned";
+      await _context.SaveChangesAsync();
+    }
+
+    return RedirectToAction(nameof(Index));
+  }
+
+  // Review endpoint
+  [HttpPost("review/{id}")]
+  public async Task<IActionResult> Review(int id);
+  if(item != null)
+  {
+    item.Status = "Reviewed";
+    await _context.SaveChangesAsync();
+  }
+  return RedirectToAction(nameof(Index));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
