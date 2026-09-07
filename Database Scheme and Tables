@@ -1,0 +1,22 @@
+Create Table Users (
+  UserId INT IDENTITY(1,1) PRIMARY KEY,
+  UserName NVARCHAR(50) NOT NULL,
+  Email NVARCHAR(100) NOT NULL,
+  CreatedAt DATETIME DEFAULT GETDATE()
+);
+
+CREATE TABLE Projects (
+  ProjectId INT IDENTITY(1,1) PRIMARY KEY,
+  ProjectName NVARCHAR(100) NOT NULL,
+  Description NVARCHAR(500),
+  StartDate DATETIME NOT NULL,
+  OwnerId INT FOREIGN KEY PREFERENCES,
+);
+
+Create Table Tasks (
+  TaskId INT IDENTITY(1,1) PRIMARY KEY,
+  Title NVARCHAR(100) NOT NULL,
+  Status NVARCHAR(50) NOT NULL,
+  ProjectId INT FOREIGN KEY REFERENCES Projects(ProjectId),
+  AssignedTo INT FOREIGN KEY REFERENCES Users(UserId),
+);
