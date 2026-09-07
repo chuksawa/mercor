@@ -1,0 +1,16 @@
+
+INSERT INTO Users (Username, Email) VALUES
+('john_doe', 'john@example.com'),
+('john_smith', 'jsmith@example.com'),
+('jane_smit', 'jane@example.com');
+
+
+INSERT INTO Projects (ProjectName, Description, StartDate, OwnerId) VALUES
+('Website Redesign', 'Update company website with new branding', '2026-01-15', 1),
+('Database Optimization', 'Improve SQL queries and speed up reports', '2025-01-10', 1);
+
+
+INSERT INTO Tasks (Title, Status, ProjectId, AssignedTo) VALUES
+('Design homepage layout', 'In Progress', 1, 1),
+('Setup API endpoints', 'Completed', 1, 2),
+('Analyze slow queries', 'Pending', 2, 3),
